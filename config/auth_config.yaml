@@ -1,0 +1,12 @@
+cookie:
+  expiry_days: 30
+  key: case_verify_secret_key_2024
+  name: case_verify_auth
+credentials:
+  usernames:
+    admin:
+      email: admin@caseverify.ai
+      name: admin
+      password: $2b$12$CrFbTy0GTj50MGvmtDmJFuFd6antEitVxUw5pS.Iwchg22ouPYIaO
+preauthorized:
+  emails: []

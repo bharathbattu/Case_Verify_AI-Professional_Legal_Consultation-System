@@ -1,0 +1,416 @@
+{
+  "money-recovery": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Sub-Divisional Magistrate",
+    "jurisdiction": "Based on monetary value and territorial jurisdiction",
+    "description": "Cases involving recovery of money, debt, loans, and financial disputes"
+  },
+  "cheque-bounce": {
+    "court_type": "Criminal Court", 
+    "hierarchy": "Magistrate Court (Judicial Magistrate First Class)",
+    "jurisdiction": "Where the cheque was presented for payment or payee resides",
+    "description": "Cases under Section 138 of Negotiable Instruments Act, 1881"
+  },
+  "consumer-complaint": {
+    "court_type": "Consumer Court",
+    "hierarchy": "District Consumer Forum / State Commission / National Commission",
+    "jurisdiction": "Based on compensation amount: District (<₹1 Cr), State (₹1-10 Cr), National (>₹10 Cr)",
+    "description": "Consumer disputes related to goods and services under Consumer Protection Act, 2019"
+  },
+  "divorce": {
+    "court_type": "Family Court",
+    "hierarchy": "Family Court / District Court",
+    "jurisdiction": "Where marriage was solemnized or parties last resided together",
+    "description": "Matrimonial disputes under Hindu Marriage Act, Muslim Personal Law, etc."
+  },
+  "property-dispute": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Sub-Judge",
+    "jurisdiction": "Where property is situated",
+    "description": "Disputes related to immovable property, ownership, possession"
+  },
+  "breach-of-contract": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Sub-Judge / Commercial Court",
+    "jurisdiction": "Where contract was to be performed or breach occurred",
+    "description": "Contractual disputes and breach of agreement cases"
+  },
+  "personal-injury": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Additional District Judge",
+    "jurisdiction": "Where injury occurred or defendant resides",
+    "description": "Personal injury claims and compensation cases"
+  },
+  "defamation": {
+    "court_type": "Civil/Criminal Court",
+    "hierarchy": "District Court / Magistrate Court",
+    "jurisdiction": "Where defamatory material was published or victim resides",
+    "description": "Defamation cases under civil and criminal law"
+  },
+  "motor-accident": {
+    "court_type": "Motor Accident Claims Tribunal",
+    "hierarchy": "MACT / District Court",
+    "jurisdiction": "Where accident occurred or claimant resides",
+    "description": "Motor accident compensation claims under Motor Vehicles Act"
+  },
+  "employment-dispute": {
+    "court_type": "Labour Court",
+    "hierarchy": "Labour Court / Industrial Tribunal / Civil Court",
+    "jurisdiction": "Where employment was based or dispute arose",
+    "description": "Employment disputes, wrongful termination, service matters"
+  },
+  "medical-negligence": {
+    "court_type": "Civil Court / Consumer Court",
+    "hierarchy": "District Court / State Consumer Commission",
+    "jurisdiction": "Where medical treatment was provided",
+    "description": "Medical negligence and professional liability cases"
+  },
+  "cybercrime": {
+    "court_type": "Criminal Court",
+    "hierarchy": "Special Court for Cyber Crimes / Sessions Court",
+    "jurisdiction": "Where crime was committed or victim resides",
+    "description": "Cases under Information Technology Act and cyber laws"
+  },
+  "domestic-violence": {
+    "court_type": "Magistrate Court",
+    "hierarchy": "Judicial Magistrate First Class",
+    "jurisdiction": "Where violence occurred or victim resides",
+    "description": "Cases under Domestic Violence Act, 2005"
+  },
+  "child-custody": {
+    "court_type": "Family Court",
+    "hierarchy": "Family Court / District Court",
+    "jurisdiction": "Where child ordinarily resides",
+    "description": "Child custody and guardianship matters"
+  },
+  "maintenance": {
+    "court_type": "Family Court / Magistrate Court",
+    "hierarchy": "Family Court / JMFC",
+    "jurisdiction": "Where parties reside",
+    "description": "Maintenance and alimony cases"
+  },
+  "property-partition": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Sub-Judge",
+    "jurisdiction": "Where property is situated",
+    "description": "Partition of joint property and inheritance disputes"
+  },
+  "rent-dispute": {
+    "court_type": "Rent Control Court",
+    "hierarchy": "Rent Controller / Rent Control Tribunal",
+    "jurisdiction": "Where rented property is situated",
+    "description": "Landlord-tenant disputes under Rent Control Acts"
+  },
+  "service-matter": {
+    "court_type": "Administrative Tribunal",
+    "hierarchy": "Central/State Administrative Tribunal",
+    "jurisdiction": "Where service was rendered",
+    "description": "Government service matters and employment disputes"
+  },
+  "tax-dispute": {
+    "court_type": "Tax Tribunal",
+    "hierarchy": "Income Tax Appellate Tribunal / High Court",
+    "jurisdiction": "Territorial tax jurisdiction",
+    "description": "Income tax and other tax-related disputes"
+  },
+  "insurance-claim": {
+    "court_type": "Civil Court / Consumer Court",
+    "hierarchy": "District Court / District Consumer Forum",
+    "jurisdiction": "Where policy was issued or claim arose",
+    "description": "Insurance claim disputes and bad faith cases"
+  },
+  "banking-dispute": {
+    "court_type": "Civil Court / Debt Recovery Tribunal",
+    "hierarchy": "DRT / District Court",
+    "jurisdiction": "Where account was maintained or dispute arose",
+    "description": "Banking disputes, loan recovery, and financial services"
+  },
+  "intellectual-property": {
+    "court_type": "Commercial Court / High Court",
+    "hierarchy": "Commercial Court / IP Division of High Court",
+    "jurisdiction": "Principal place of business of plaintiff",
+    "description": "Patent, trademark, copyright, and IP disputes"
+  },
+  "trademark-infringement": {
+    "court_type": "Commercial Court / High Court",
+    "hierarchy": "Commercial Court / High Court",
+    "jurisdiction": "Where infringement occurred",
+    "description": "Trademark infringement and passing off cases"
+  },
+  "copyright-violation": {
+    "court_type": "Commercial Court / High Court",
+    "hierarchy": "Commercial Court / High Court",
+    "jurisdiction": "Where violation occurred",
+    "description": "Copyright infringement and piracy cases"
+  },
+  "labour-dispute": {
+    "court_type": "Labour Court",
+    "hierarchy": "Labour Court / Industrial Tribunal",
+    "jurisdiction": "Where industry is located",
+    "description": "Industrial disputes and labour law violations"
+  },
+  "provident-fund": {
+    "court_type": "PF Appellate Tribunal",
+    "hierarchy": "Employees' Provident Fund Appellate Tribunal",
+    "jurisdiction": "Regional jurisdiction",
+    "description": "EPF disputes and contribution issues"
+  },
+  "gratuity-claim": {
+    "court_type": "Labour Court / Civil Court",
+    "hierarchy": "Labour Court / District Court",
+    "jurisdiction": "Where employment was based",
+    "description": "Gratuity payment disputes"
+  },
+  "workmen-compensation": {
+    "court_type": "Commissioner for Workmen's Compensation",
+    "hierarchy": "Workmen's Compensation Commissioner",
+    "jurisdiction": "Where accident occurred",
+    "description": "Workmen's compensation claims"
+  },
+  "environmental-pollution": {
+    "court_type": "National Green Tribunal",
+    "hierarchy": "NGT / High Court",
+    "jurisdiction": "Regional benches of NGT",
+    "description": "Environmental protection and pollution cases"
+  },
+  "dowry-harassment": {
+    "court_type": "Criminal Court",
+    "hierarchy": "Sessions Court / JMFC",
+    "jurisdiction": "Where harassment occurred",
+    "description": "Cases under Dowry Prohibition Act"
+  },
+  "sc-st-atrocity": {
+    "court_type": "Special Court",
+    "hierarchy": "Special Court for SC/ST Cases",
+    "jurisdiction": "Where atrocity occurred",
+    "description": "Cases under SC/ST Prevention of Atrocities Act"
+  },
+  "sexual-harassment": {
+    "court_type": "Criminal Court / Civil Court",
+    "hierarchy": "Sessions Court / District Court",
+    "jurisdiction": "Where harassment occurred",
+    "description": "Sexual harassment cases under various laws"
+  },
+  "fraud": {
+    "court_type": "Criminal Court",
+    "hierarchy": "Sessions Court / JMFC",
+    "jurisdiction": "Where fraud was committed",
+    "description": "Fraud and cheating cases under IPC"
+  },
+  "cheating": {
+    "court_type": "Criminal Court",
+    "hierarchy": "Sessions Court / JMFC",
+    "jurisdiction": "Where cheating occurred",
+    "description": "Cheating and criminal breach of trust cases"
+  },
+  "criminal-complaint": {
+    "court_type": "Criminal Court",
+    "hierarchy": "JMFC / Sessions Court",
+    "jurisdiction": "Where offence was committed",
+    "description": "General criminal complaints under IPC/CrPC"
+  },
+  "bail-application": {
+    "court_type": "Criminal Court",
+    "hierarchy": "Sessions Court / High Court",
+    "jurisdiction": "Where case is pending",
+    "description": "Bail applications in criminal cases"
+  },
+  "anticipatory-bail": {
+    "court_type": "Sessions Court / High Court",
+    "hierarchy": "Sessions Court / High Court",
+    "jurisdiction": "Territorial jurisdiction of the court",
+    "description": "Anticipatory bail applications"
+  },
+  "quashing-petition": {
+    "court_type": "High Court",
+    "hierarchy": "High Court",
+    "jurisdiction": "State High Court jurisdiction",
+    "description": "Petitions for quashing FIR/proceedings"
+  },
+  "writ-petition": {
+    "court_type": "High Court / Supreme Court",
+    "hierarchy": "High Court / Supreme Court",
+    "jurisdiction": "Constitutional jurisdiction",
+    "description": "Constitutional writ petitions"
+  },
+  "pil": {
+    "court_type": "High Court / Supreme Court",
+    "hierarchy": "High Court / Supreme Court",
+    "jurisdiction": "Constitutional jurisdiction",
+    "description": "Public Interest Litigation"
+  },
+  "habeas-corpus": {
+    "court_type": "High Court / Supreme Court",
+    "hierarchy": "High Court / Supreme Court",
+    "jurisdiction": "Constitutional jurisdiction",
+    "description": "Habeas corpus petitions for illegal detention"
+  },
+  "mandamus": {
+    "court_type": "High Court",
+    "hierarchy": "High Court",
+    "jurisdiction": "State jurisdiction",
+    "description": "Writ of mandamus for public duty"
+  },
+  "certiorari": {
+    "court_type": "High Court",
+    "hierarchy": "High Court",
+    "jurisdiction": "State jurisdiction",
+    "description": "Writ of certiorari for judicial review"
+  },
+  "prohibition": {
+    "court_type": "High Court",
+    "hierarchy": "High Court",
+    "jurisdiction": "State jurisdiction",
+    "description": "Writ of prohibition"
+  },
+  "quo-warranto": {
+    "court_type": "High Court",
+    "hierarchy": "High Court",
+    "jurisdiction": "State jurisdiction",
+    "description": "Writ of quo-warranto for public office"
+  },
+  "arbitration": {
+    "court_type": "Commercial Court / District Court",
+    "hierarchy": "Commercial Court / District Court",
+    "jurisdiction": "Seat of arbitration",
+    "description": "Arbitration and alternative dispute resolution"
+  },
+  "insolvency": {
+    "court_type": "National Company Law Tribunal",
+    "hierarchy": "NCLT",
+    "jurisdiction": "Regional benches",
+    "description": "Corporate insolvency and bankruptcy cases"
+  },
+  "corporate-dispute": {
+    "court_type": "National Company Law Tribunal",
+    "hierarchy": "NCLT / Commercial Court",
+    "jurisdiction": "Where company is registered",
+    "description": "Corporate governance and company law disputes"
+  },
+  "securities-fraud": {
+    "court_type": "Special Court / Commercial Court",
+    "hierarchy": "Special Court for Securities / High Court",
+    "jurisdiction": "Where fraud occurred",
+    "description": "Securities market fraud and SEBI violations"
+  },
+  "fema-violation": {
+    "court_type": "Adjudicating Authority / Tribunal",
+    "hierarchy": "FEMA Adjudicating Authority",
+    "jurisdiction": "Regional jurisdiction",
+    "description": "Foreign Exchange Management Act violations"
+  },
+  "customs-duty": {
+    "court_type": "Customs Tribunal",
+    "hierarchy": "Customs, Excise & Service Tax Appellate Tribunal",
+    "jurisdiction": "Regional benches",
+    "description": "Customs duty disputes and violations"
+  },
+  "excise-duty": {
+    "court_type": "Excise Tribunal",
+    "hierarchy": "Customs, Excise & Service Tax Appellate Tribunal",
+    "jurisdiction": "Regional benches",
+    "description": "Central excise duty disputes"
+  },
+  "gst-dispute": {
+    "court_type": "GST Appellate Tribunal",
+    "hierarchy": "GST Appellate Tribunal",
+    "jurisdiction": "State/Central jurisdiction",
+    "description": "Goods and Services Tax disputes"
+  },
+  "electricity-dispute": {
+    "court_type": "Electricity Regulatory Commission",
+    "hierarchy": "State/Central Electricity Regulatory Commission",
+    "jurisdiction": "State/Regional jurisdiction",
+    "description": "Electricity tariff and supply disputes"
+  },
+  "telecom-dispute": {
+    "court_type": "Telecom Disputes Settlement Tribunal",
+    "hierarchy": "TDSAT",
+    "jurisdiction": "National jurisdiction",
+    "description": "Telecommunications disputes"
+  },
+  "education-dispute": {
+    "court_type": "Civil Court / High Court",
+    "hierarchy": "District Court / High Court",
+    "jurisdiction": "Where institution is located",
+    "description": "Education-related disputes and admissions"
+  },
+  "disability-rights": {
+    "court_type": "Civil Court / High Court",
+    "hierarchy": "District Court / High Court",
+    "jurisdiction": "Where discrimination occurred",
+    "description": "Disability rights and accessibility issues"
+  },
+  "senior-citizen": {
+    "court_type": "Civil Court / Tribunal",
+    "hierarchy": "District Court / Senior Citizens Tribunal",
+    "jurisdiction": "Where senior citizen resides",
+    "description": "Senior citizen welfare and maintenance"
+  },
+  "tribal-rights": {
+    "court_type": "Civil Court / High Court",
+    "hierarchy": "District Court / High Court",
+    "jurisdiction": "Tribal area jurisdiction",
+    "description": "Tribal rights and PESA violations"
+  },
+  "forest-rights": {
+    "court_type": "Civil Court / High Court",
+    "hierarchy": "District Court / High Court",
+    "jurisdiction": "Where forest is located",
+    "description": "Forest rights and conservation disputes"
+  },
+  "land-acquisition": {
+    "court_type": "Land Acquisition Tribunal",
+    "hierarchy": "District Collector / Land Tribunal",
+    "jurisdiction": "Where land is situated",
+    "description": "Land acquisition and compensation disputes"
+  },
+  "water-dispute": {
+    "court_type": "Water Disputes Tribunal",
+    "hierarchy": "Inter-State Water Disputes Tribunal",
+    "jurisdiction": "Regional/National jurisdiction",
+    "description": "Water sharing and irrigation disputes"
+  },
+  "air-pollution": {
+    "court_type": "National Green Tribunal",
+    "hierarchy": "NGT / Pollution Control Board",
+    "jurisdiction": "Regional NGT benches",
+    "description": "Air pollution and environmental violations"
+  },
+  "noise-pollution": {
+    "court_type": "Civil Court / NGT",
+    "hierarchy": "District Court / NGT",
+    "jurisdiction": "Where pollution occurs",
+    "description": "Noise pollution complaints"
+  },
+  "food-adulteration": {
+    "court_type": "Criminal Court",
+    "hierarchy": "JMFC / Sessions Court",
+    "jurisdiction": "Where adulteration was detected",
+    "description": "Food safety and adulteration cases"
+  },
+  "drug-licensing": {
+    "court_type": "Drug Appellate Tribunal",
+    "hierarchy": "Drug Technical Advisory Board",
+    "jurisdiction": "State/Central jurisdiction",
+    "description": "Drug licensing and pharmaceutical disputes"
+  },
+  "charity-dispute": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Charity Commissioner",
+    "jurisdiction": "Where trust/charity operates",
+    "description": "Charitable trust and NGO disputes"
+  },
+  "society-dispute": {
+    "court_type": "Civil Court",
+    "hierarchy": "District Court / Registrar of Societies",
+    "jurisdiction": "Where society is registered",
+    "description": "Society registration and management disputes"
+  },
+  "cooperative-dispute": {
+    "court_type": "Cooperative Court",
+    "hierarchy": "Cooperative Court / Registrar",
+    "jurisdiction": "Where cooperative operates",
+    "description": "Cooperative society disputes"
+  }
+}

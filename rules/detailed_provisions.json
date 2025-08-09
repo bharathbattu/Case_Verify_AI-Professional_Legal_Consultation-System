@@ -1,0 +1,152 @@
+{
+    "money-recovery": {
+        "detailed_provisions": {
+            "primary": "Limitation Act, 1963 - Article 54",
+            "sections": ["Section 3 - Bar of limitation", "Section 5 - Extension of prescribed period"],
+            "related_acts": ["Indian Contract Act, 1872 - Section 73", "CPC, 1908 - Order XXXVII"],
+            "precedents": [
+                "Union of India v. Popular Construction Co. (2001) - Accrual of cause of action",
+                "State Bank of India v. Gayatri Devi (2008) - Money recovery limitation"
+            ]
+        },
+        "years": 3,
+        "article": "Limitation Act, 1963 - Art 54",
+        "description": "For money lent or money due on account stated",
+        "starting_point": "When money becomes due or when contract is breached"
+    },
+    "property-dispute": {
+        "detailed_provisions": {
+            "primary": "Limitation Act, 1963 - Article 65",
+            "sections": ["Section 17 - Effect of acknowledgment", "Section 18 - Effect of payment"],
+            "related_acts": ["Transfer of Property Act, 1882", "Indian Registration Act, 1908"],
+            "precedents": [
+                "Baldev Singh v. Manohar Singh (2006) - Title disputes and limitation",
+                "Sarwan Singh v. Kasturi Lal (1977) - Property possession rights"
+            ]
+        },
+        "years": 12,
+        "article": "Limitation Act, 1963 - Art 65",
+        "description": "For possession of immovable property",
+        "starting_point": "When dispossession occurs or title is questioned"
+    },
+    "cheque-bounce": {
+        "detailed_provisions": {
+            "primary": "Negotiable Instruments Act, 1881 - Section 138",
+            "sections": ["Section 138 - Dishonour of cheque", "Section 142 - Cognizance of offences"],
+            "related_acts": ["CrPC, 1973 - Section 142", "Banking Regulation Act, 1949"],
+            "precedents": [
+                "Damodar S. Prabhu v. Sayed Babalal H. (2010) - Cheque bounce limitation",
+                "Kumar Exports v. Sharma Carpets (2009) - Notice requirements"
+            ]
+        },
+        "years": 2,
+        "article": "Limitation Act, 1963 - Art 137",
+        "description": "For prosecution for dishonour of cheque",
+        "starting_point": "From the date of receipt of notice by drawer"
+    },
+    "consumer-complaint": {
+        "detailed_provisions": {
+            "primary": "Consumer Protection Act, 2019 - Section 35",
+            "sections": ["Section 35 - Limitation period", "Section 2(5) - Consumer definition"],
+            "related_acts": ["Contract Act, 1872", "Sale of Goods Act, 1930"],
+            "precedents": [
+                "Spring Meadows Hospital v. Harjol Ahluwalia (1998) - Medical negligence",
+                "Lucknow Development Authority v. M.K. Gupta (1994) - Service deficiency"
+            ]
+        },
+        "years": 2,
+        "article": "CPA 2019 - S 35",
+        "description": "For consumer complaints regarding goods or services",
+        "starting_point": "When deficiency in service is noticed or goods delivered"
+    },
+    "divorce": {
+        "detailed_provisions": {
+            "primary": "Hindu Marriage Act, 1955 - Various Sections",
+            "sections": ["Section 13 - Divorce grounds", "Section 13B - Mutual consent divorce"],
+            "related_acts": ["Indian Christian Marriage Act, 1872", "Parsi Marriage Act, 1936"],
+            "precedents": [
+                "Naveen Kohli v. Neelu Kohli (2006) - Irretrievable breakdown",
+                "Samar Ghosh v. Jaya Ghosh (2007) - Mental cruelty grounds"
+            ]
+        },
+        "years": 3,
+        "article": "Limitation Act, 1963 - Art 120",
+        "description": "For matrimonial relief including divorce",
+        "starting_point": "When grounds for divorce arise or are discovered"
+    },
+    "personal-injury": {
+        "detailed_provisions": {
+            "primary": "Limitation Act, 1963 - Article 131",
+            "sections": ["Section 6 - Legal disability", "Section 9 - Continuous wrong"],
+            "related_acts": ["Motor Vehicles Act, 1988 - Section 166", "Indian Penal Code, 1860"],
+            "precedents": [
+                "National Insurance Co. v. Pranay Sethi (2017) - Accident compensation",
+                "Sarla Verma v. Delhi Transport Corporation (2009) - Compensation calculation"
+            ]
+        },
+        "years": 2,
+        "article": "Limitation Act, 1963 - Art 131",
+        "description": "For compensation for tort including personal injury",
+        "starting_point": "When injury occurs or is discovered"
+    },
+    "breach-of-contract": {
+        "detailed_provisions": {
+            "primary": "Limitation Act, 1963 - Article 55",
+            "sections": ["Section 19 - Fresh accrual", "Section 20 - Continuing breach"],
+            "related_acts": ["Indian Contract Act, 1872 - Section 73-75", "Specific Relief Act, 1963"],
+            "precedents": [
+                "Ganga Bai v. Vijay Kumar (1974) - Contract breach limitation",
+                "State of Kerala v. United Planters (1963) - Continuing breach concept"
+            ]
+        },
+        "years": 3,
+        "article": "Limitation Act, 1963 - Art 55",
+        "description": "For breach of contract not specifically provided",
+        "starting_point": "When contract is breached or performance becomes due"
+    },
+    "domestic-violence": {
+        "detailed_provisions": {
+            "primary": "Protection of Women from Domestic Violence Act, 2005",
+            "sections": ["Section 12 - Application to magistrate", "Section 30 - Limitation"],
+            "related_acts": ["IPC, 1860 - Section 498A", "CrPC, 1973 - Section 125"],
+            "precedents": [
+                "Indra Sarma v. V.K.V. Sarma (2013) - Domestic relationship definition",
+                "S.R. Batra v. Taruna Batra (2007) - Domestic violence scope"
+            ]
+        },
+        "years": 1,
+        "article": "DV Act, 2005 - S 30",
+        "description": "For protection orders under Domestic Violence Act",
+        "starting_point": "When domestic violence occurs or is reported"
+    },
+    "medical-negligence": {
+        "detailed_provisions": {
+            "primary": "Limitation Act, 1963 - Article 134",
+            "sections": ["Section 11 - Suits for specific performance", "Section 12 - Other suits"],
+            "related_acts": ["Consumer Protection Act, 2019", "Indian Medical Council Act, 1956"],
+            "precedents": [
+                "Indian Medical Association v. V.P. Shantha (1995) - Medical service definition",
+                "Jacob Mathew v. State of Punjab (2005) - Medical negligence standards"
+            ]
+        },
+        "years": 2,
+        "article": "Limitation Act, 1963 - Art 134",
+        "description": "For compensation due to medical negligence",
+        "starting_point": "When negligence is discovered or injury manifests"
+    },
+    "cybercrime": {
+        "detailed_provisions": {
+            "primary": "Information Technology Act, 2000 - Section 77B",
+            "sections": ["Section 43 - Penalty for damage", "Section 66 - Computer related offences"],
+            "related_acts": ["IPC, 1860 - Section 420", "CrPC, 1973 - Chapter XV"],
+            "precedents": [
+                "State of Tamil Nadu v. Suhas Katti (2004) - First cyber crime case",
+                "Shreya Singhal v. Union of India (2015) - Section 66A struck down"
+            ]
+        },
+        "years": 3,
+        "article": "IT Act, 2000 - S 77B",
+        "description": "For offences under Information Technology Act",
+        "starting_point": "When cyber crime is committed or discovered"
+    }
+}

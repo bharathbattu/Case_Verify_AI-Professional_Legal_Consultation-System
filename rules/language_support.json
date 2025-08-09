@@ -1,0 +1,65 @@
+{
+    "hindi_translations": {
+        "interface": {
+            "title": "केस-वेरिफाई AI - कानूनी सहायक",
+            "subtitle": "भारतीय कानूनी प्रणाली के लिए स्मार्ट कानूनी सलाह",
+            "case_facts": "मामले के तथ्य",
+            "case_facts_placeholder": "अपने कानूनी मामले के तथ्यों का वर्णन करें...",
+            "relief_type": "राहत का प्रकार",
+            "pin_code": "पिन कोड",
+            "analyze_button": "विश्लेषण करें",
+            "legal_verdict": "कानूनी निर्णय",
+            "days_remaining": "शेष दिन",
+            "filing_deadline": "दाखिल करने की अंतिम तिथि",
+            "court_details": "न्यायालय विवरण",
+            "legal_provision": "कानूनी प्रावधान",
+            "confidence_score": "विश्वसनीयता स्कोर",
+            "disclaimer": "अस्वीकरण: यह केवल शैक्षिक उद्देश्यों के लिए है। कानूनी सलाह के लिए योग्य वकील से संपर्क करें।"
+        },
+        "case_types": {
+            "money-recovery": "पैसा वसूली",
+            "property-dispute": "संपत्ति विवाद", 
+            "cheque-bounce": "चेक बाउंस",
+            "consumer-complaint": "उपभोक्ता शिकायत",
+            "divorce": "तलाक",
+            "personal-injury": "व्यक्तिगत चोट",
+            "breach-of-contract": "अनुबंध उल्लंघन",
+            "domestic-violence": "घरेलू हिंसा",
+            "medical-negligence": "चिकित्सा लापरवाही",
+            "cybercrime": "साइबर अपराध",
+            "labour-dispute": "श्रम विवाद",
+            "service-matter": "सेवा मामला",
+            "child-custody": "बच्चे की कस्टडी",
+            "maintenance": "भरण-पोषण",
+            "fraud": "धोखाधड़ी"
+        },
+        "legal_terms": {
+            "limitation_period": "परिसीमा अवधि",
+            "cause_of_action": "वाद का कारण",
+            "civil_court": "दीवानी न्यायालय",
+            "criminal_court": "फौजदारी न्यायालय",
+            "family_court": "पारिवारिक न्यायालय",
+            "consumer_court": "उपभोक्ता न्यायालय",
+            "high_court": "उच्च न्यायालय",
+            "supreme_court": "सर्वोच्च न्यायालय",
+            "magistrate_court": "मजिस्ट्रेट न्यायालय",
+            "sessions_court": "सत्र न्यायालय"
+        },
+        "status_messages": {
+            "file_now": "अभी दाखिल करें!",
+            "limitation_over": "परिसीमा समाप्त हो सकती है",
+            "urgent": "तत्काल कार्रवाई आवश्यक",
+            "time_remaining": "समय शेष है"
+        },
+        "error_messages": {
+            "invalid_facts": "कृपया मामले के तथ्य दर्ज करें",
+            "invalid_pin": "कृपया वैध पिन कोड दर्ज करें",
+            "select_case_type": "कृपया मामले का प्रकार चुनें",
+            "analysis_failed": "विश्लेषण में त्रुटि, कृपया पुनः प्रयास करें"
+        }
+    },
+    "regional_support": {
+        "supported_languages": ["hindi", "english"],
+        "future_languages": ["tamil", "telugu", "bengali", "marathi", "gujarati"]
+    }
+}
