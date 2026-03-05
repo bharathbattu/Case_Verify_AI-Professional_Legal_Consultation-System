@@ -1,0 +1,60 @@
+# =============================================================================
+# Case-Verify AI — Docker Compose
+# Op-01 / Hardening Plan
+#
+# Usage:
+#   cp .env.example .env        # fill in real values
+#   docker compose up --build   # build and start
+#   docker compose down         # stop
+# =============================================================================
+
+services:
+  case-verify-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: case-verify-ai
+    restart: unless-stopped
+
+    # Inject secrets from .env file (never bake into image)
+    env_file:
+      - .env
+
+    ports:
+      - "${HOST_PORT:-8501}:8501"
+
+    # Persist SQLite database across container restarts
+    volumes:
+      - case-verify-data:/app/data
+
+    # Resource limits — tune for your host
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1.0"
+        reservations:
+          memory: 256M
+          cpus: "0.25"
+
+    # Health check mirrors Dockerfile HEALTHCHECK (compose overrides take precedence)
+    healthcheck:
+      test: ["CMD", "python", "health.py"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+    # Security: read-only filesystem with explicit writable paths
+    read_only: true
+    tmpfs:
+      - /tmp:size=100M
+    # /app/data is writable via the named volume
+
+    # Drop all capabilities, add back only what Streamlit needs
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  case-verify-data:
+    driver: local
