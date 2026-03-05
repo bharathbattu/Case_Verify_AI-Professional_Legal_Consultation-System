@@ -39,9 +39,6 @@ nul
 *.sqlite
 *.sqlite3
 
-# Sensitive config (secrets should be in .env, not committed)
-config/auth_config.yaml
-
 # Test / coverage artifacts
 .coverage
 .coverage.*

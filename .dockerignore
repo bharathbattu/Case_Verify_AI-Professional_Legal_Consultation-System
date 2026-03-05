@@ -33,8 +33,6 @@ ENV/
 *.sqlite3
 
 # Audit / documentation artifacts (not needed at runtime)
-AUDIT_ARTIFACTS/
-PROJECT_VALIDATION_REPORT.md
 LICENSE
 README.md
 
