@@ -69,7 +69,7 @@ class EmailSender:
             
             part.add_header(
                 'Content-Disposition',
-                f'attachment; filename= {attachment["filename"]}'
+                f'attachment; filename="{attachment["filename"]}"'
             )
             
             msg.attach(part)

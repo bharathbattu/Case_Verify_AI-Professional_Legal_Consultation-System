@@ -7,9 +7,10 @@ Fixes: S-02, R-01 — Replaces empty authenticator with production-grade auth.
 """
 import logging
 import time
+import threading
 import streamlit as st
 from typing import Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 
 from passlib.hash import bcrypt
 from database.models import User
@@ -55,6 +56,7 @@ def _audit(*, user_id=None, action="", resource_type=None, resource_id=None, det
 # ---------------------------------------------------------------------------
 # Key = username, Value = (fail_count, first_fail_epoch)
 _login_attempts: Dict[str, tuple] = {}
+_login_attempts_lock = threading.Lock()
 
 # Defaults — overrideable via config.py / env vars at call-site
 _DEFAULT_MAX_ATTEMPTS = 5
@@ -69,33 +71,36 @@ def _check_rate_limit(
     """
     Return seconds remaining in lockout if rate-limited, else None.
     """
-    record = _login_attempts.get(username)
-    if record is None:
+    with _login_attempts_lock:
+        record = _login_attempts.get(username)
+        if record is None:
+            return None
+        fail_count, first_fail_ts = record
+        elapsed = time.time() - first_fail_ts
+        if elapsed > lockout_seconds:
+            # Window expired — reset
+            _login_attempts.pop(username, None)
+            return None
+        if fail_count >= max_attempts:
+            remaining = int(lockout_seconds - elapsed)
+            return max(remaining, 1)
         return None
-    fail_count, first_fail_ts = record
-    elapsed = time.time() - first_fail_ts
-    if elapsed > lockout_seconds:
-        # Window expired — reset
-        _login_attempts.pop(username, None)
-        return None
-    if fail_count >= max_attempts:
-        remaining = int(lockout_seconds - elapsed)
-        return max(remaining, 1)
-    return None
 
 
 def _record_failed_attempt(username: str) -> None:
-    record = _login_attempts.get(username)
-    now = time.time()
-    if record is None:
-        _login_attempts[username] = (1, now)
-    else:
-        fail_count, first_fail_ts = record
-        _login_attempts[username] = (fail_count + 1, first_fail_ts)
+    with _login_attempts_lock:
+        record = _login_attempts.get(username)
+        now = time.time()
+        if record is None:
+            _login_attempts[username] = (1, now)
+        else:
+            fail_count, first_fail_ts = record
+            _login_attempts[username] = (fail_count + 1, first_fail_ts)
 
 
 def _clear_attempts(username: str) -> None:
-    _login_attempts.pop(username, None)
+    with _login_attempts_lock:
+        _login_attempts.pop(username, None)
 
 
 class Authenticator:
@@ -139,20 +144,20 @@ class Authenticator:
                 bcrypt.hash("dummy_password_for_timing")
                 _record_failed_attempt(username)
                 _record_login_metric(success=False)
-                logger.warning(f"Login failed: user '{username}' not found")
+                logger.warning("Login failed: user '%s' not found", username)
                 return False
 
             if not bcrypt.verify(password, user.hashed_password):
                 _record_failed_attempt(username)
                 _record_login_metric(success=False)
-                logger.warning(f"Login failed: invalid password for user '{username}'")
+                logger.warning("Login failed: invalid password for user '%s'", username)
                 return False
 
             # Successful authentication — clear rate limiter & create session
             _clear_attempts(username)
             session_token = self.session_manager.create_session(user.id)
             if session_token is None:
-                logger.error(f"Login succeeded but session creation failed for user '{username}'")
+                logger.error("Login succeeded but session creation failed for user '%s'", username)
                 return False
 
             # Update Streamlit session state
@@ -164,17 +169,17 @@ class Authenticator:
             st.session_state['current_user'] = user
 
             # Update last login timestamp
-            user.last_login = datetime.utcnow()
+            user.last_login = datetime.now(timezone.utc)
             db.commit()
 
-            logger.info(f"User '{username}' logged in successfully")
+            logger.info("User '%s' logged in successfully", username)
             _record_login_metric(success=True)
             _audit(user_id=user.id, action="login", resource_type="session")
             return True
 
         except Exception as e:
             db.rollback()
-            logger.error(f"Login error for user '{username}': {str(e)}")
+            logger.error("Login error for user '%s': %s", username, e)
             _record_login_metric(success=False)
             _audit(action="login_error", details={"username": username, "error": str(e)})
             return False
@@ -187,10 +192,10 @@ class Authenticator:
         username = st.session_state.get('username', 'unknown')
         try:
             self.session_manager.end_session()
-            logger.info(f"User '{username}' logged out")
+            logger.info("User '%s' logged out", username)
             _audit(user_id=user_id, action="logout", resource_type="session")
         except Exception as e:
-            logger.error(f"Logout error: {str(e)}")
+            logger.error("Logout error: %s", e)
         finally:
             self.session_manager.clear_session_state()
 
@@ -235,7 +240,7 @@ def register_user(
         return False
 
     if len(password) < 6:
-        logger.warning(f"Registration rejected: password too short for '{username}'")
+        logger.warning("Registration rejected: password too short for '%s'", username)
         return False
 
     with UserManager() as um:
@@ -247,9 +252,9 @@ def register_user(
             organization=organization or None
         )
         if success:
-            logger.info(f"User '{username}' registered successfully")
+            logger.info("User '%s' registered successfully", username)
         else:
-            logger.warning(f"Registration failed for '{username}' (duplicate or DB error)")
+            logger.warning("Registration failed for '%s' (duplicate or DB error)", username)
         return success
 
 

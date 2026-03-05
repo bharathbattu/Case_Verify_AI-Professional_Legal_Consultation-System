@@ -6,13 +6,24 @@ Handles PDF upload, OCR integration, and template generation
 import streamlit as st
 import io
 import base64
-from typing import Optional, Dict, Any, List, Tuple
+import html as _html
+from typing import Optional, Dict, Any, List
 import logging
 from datetime import datetime
-import json
-import re
 
-# Document processing imports
+# Document processing imports — set safe defaults before try/except
+PyPDF2 = None
+fitz = None
+Image = None
+pytesseract = None
+docx = None
+Document = None
+Inches = None
+Pt = None
+WD_ALIGN_PARAGRAPH = None
+WD_SECTION = None
+mammoth = None
+
 try:
     import PyPDF2
     import fitz  # PyMuPDF for better PDF handling
@@ -25,7 +36,7 @@ try:
     from docx.enum.section import WD_SECTION
     import mammoth
 except ImportError as e:
-    logging.warning(f"Document processing dependencies not installed: {e}")
+    logging.warning("Document processing dependencies not installed: %s", e)
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +83,7 @@ class DocumentProcessor:
                 return {"success": False, "error": "Unsupported file type"}
                 
         except Exception as e:
-            logger.error(f"Error processing uploaded file: {str(e)}")
+            logger.error("Error processing uploaded file: %s", e)
             return {"success": False, "error": f"Processing error: {str(e)}"}
     
     def _process_pdf(self, uploaded_file) -> Dict[str, Any]:
@@ -123,7 +134,7 @@ class DocumentProcessor:
                 }
                 
         except Exception as e:
-            logger.error(f"PDF processing error: {str(e)}")
+            logger.error("PDF processing error: %s", e)
             return {"success": False, "error": f"PDF processing failed: {str(e)}"}
     
     def _process_word_document(self, uploaded_file) -> Dict[str, Any]:
@@ -165,7 +176,7 @@ class DocumentProcessor:
                     return {"success": False, "error": "Unable to process .doc file. Please convert to .docx format."}
                     
         except Exception as e:
-            logger.error(f"Word document processing error: {str(e)}")
+            logger.error("Word document processing error: %s", e)
             return {"success": False, "error": f"Word document processing failed: {str(e)}"}
     
     def _process_text_file(self, uploaded_file) -> Dict[str, Any]:
@@ -194,7 +205,7 @@ class DocumentProcessor:
             return {"success": False, "error": "Unable to decode text file with supported encodings"}
             
         except Exception as e:
-            logger.error(f"Text file processing error: {str(e)}")
+            logger.error("Text file processing error: %s", e)
             return {"success": False, "error": f"Text file processing failed: {str(e)}"}
     
     def _process_image_ocr(self, uploaded_file) -> Dict[str, Any]:
@@ -218,7 +229,7 @@ class DocumentProcessor:
             }
             
         except Exception as e:
-            logger.error(f"OCR processing error: {str(e)}")
+            logger.error("OCR processing error: %s", e)
             return {"success": False, "error": f"OCR processing failed: {str(e)}"}
 
 
@@ -305,7 +316,7 @@ class LegalTemplateGenerator:
             }
             
         except Exception as e:
-            logger.error(f"Legal notice generation error: {str(e)}")
+            logger.error("Legal notice generation error: %s", e)
             return {"success": False, "error": f"Template generation failed: {str(e)}"}
     
     def generate_court_petition(self, case_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -414,7 +425,7 @@ class LegalTemplateGenerator:
             }
             
         except Exception as e:
-            logger.error(f"Court petition generation error: {str(e)}")
+            logger.error("Court petition generation error: %s", e)
             return {"success": False, "error": f"Petition generation failed: {str(e)}"}
     
     def generate_affidavit(self, case_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -474,7 +485,7 @@ class LegalTemplateGenerator:
             }
             
         except Exception as e:
-            logger.error(f"Affidavit generation error: {str(e)}")
+            logger.error("Affidavit generation error: %s", e)
             return {"success": False, "error": f"Affidavit generation failed: {str(e)}"}
 
 
@@ -482,7 +493,9 @@ def create_download_link(file_bytes: io.BytesIO, filename: str, link_text: str) 
     """Create a download link for the generated document"""
     b64 = base64.b64encode(file_bytes.read()).decode()
     file_bytes.seek(0)  # Reset stream position
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{b64}" download="{filename}" class="download-link">{link_text}</a>'
+    safe_filename = _html.escape(filename, quote=True)
+    safe_link_text = _html.escape(link_text)
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{b64}" download="{safe_filename}" class="download-link">{safe_link_text}</a>'
     return href
 
 

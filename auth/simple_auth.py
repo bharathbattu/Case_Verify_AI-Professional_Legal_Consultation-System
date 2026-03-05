@@ -13,6 +13,7 @@ import os
 import json
 import uuid
 import streamlit as st
+from config import settings as _config
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,9 @@ def _load_dev_users() -> dict:
     Returns an empty dict when the variable is absent or in production,
     which effectively disables simple auth login.
     """
+    if _config.is_production:
+        logger.warning("SimpleAuthenticator is disabled in production mode")
+        return {}
     raw = os.getenv("SIMPLE_AUTH_USERS", "")
     if not raw.strip():
         return {}

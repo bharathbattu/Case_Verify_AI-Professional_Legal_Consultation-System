@@ -7,7 +7,7 @@ cleanup_expired_sessions, extend_session, get_active_sessions, etc.
 
 import pytest
 from types import SimpleNamespace
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch, MagicMock, call
 import streamlit as st
 
@@ -363,8 +363,8 @@ class TestGetSessionInfo:
         _clear_st()
         fake_session = MagicMock()
         fake_session.user_id = 7
-        fake_session.created_at = datetime.utcnow()
-        fake_session.expires_at = datetime.utcnow() + timedelta(hours=1)
+        fake_session.created_at = datetime.now(timezone.utc)
+        fake_session.expires_at = datetime.now(timezone.utc) + timedelta(hours=1)
         fake_session.is_active = True
         fake_session.ip_address = "127.0.0.1"
         fake_session.user_agent = "test-agent"

@@ -1,4 +1,4 @@
-import json, os, datetime, logging, hashlib, time
+import json, os, datetime, logging, hashlib, time, threading
 import google.generativeai as genai
 from dotenv import load_dotenv
 from typing import Dict, Any, Optional
@@ -39,7 +39,7 @@ else:
         )
         logger.info("AI model successfully initialized")
     except Exception as e:
-        logger.error(f"Failed to initialize AI model: {str(e)}")
+        logger.error("Failed to initialize AI model: %s", e)
         AI_ENABLED = False
         model = None
 
@@ -283,6 +283,7 @@ _response_cache = _LRUCache()
 _last_api_call = 0
 _api_call_delay = 1  # seconds between API calls
 _API_TIMEOUT = 30  # seconds for Gemini API calls
+_api_lock = threading.Lock()  # protects _last_api_call and _response_cache
 
 def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) -> Dict[str, Any]:
     """
@@ -315,8 +316,9 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
     # Generate cache key
     cache_key = get_cache_key(facts, relief, pin, case_type)
     
-    # Check cache first
-    cached = _response_cache.get_item(cache_key)
+    # Check cache first (thread-safe)
+    with _api_lock:
+        cached = _response_cache.get_item(cache_key)
     if cached is not None:
         logger.info("Using cached analysis result")
         inc_cache_hit()
@@ -324,7 +326,7 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
     else:
         inc_cache_miss()
         # relief_key already mapped above
-        logger.info(f"Analyzing case: relief='{relief}' mapped to '{relief_key}', pin={pin}")
+        logger.info("Analyzing case: relief='%s' mapped to '%s', pin=%s", relief, relief_key, pin)
         
         if not AI_ENABLED:
             # Enhanced offline mode analysis
@@ -505,16 +507,19 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
                 "precedent_references": precedent_references,
                 "risk_factors": risk_factors
             }
-            _response_cache.put_item(cache_key, data)
+            with _api_lock:
+                _response_cache.put_item(cache_key, data)
         else:
-            # Rate limiting for API calls
-            current_time = time.time()
-            if current_time - _last_api_call < _api_call_delay:
-                time.sleep(_api_call_delay - (current_time - _last_api_call))
+            # Rate limiting for API calls (thread-safe)
+            with _api_lock:
+                current_time = time.time()
+                if current_time - _last_api_call < _api_call_delay:
+                    time.sleep(_api_call_delay - (current_time - _last_api_call))
             
             try:
                 # AI Analysis with optimized configuration
-                _last_api_call = time.time()
+                with _api_lock:
+                    _last_api_call = time.time()
                 _api_call_start = _last_api_call
                 resp = model.generate_content(
                     PROMPT.format(
@@ -530,7 +535,7 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
                 if not resp.text:
                     raise ValueError("Empty response from AI model")
                     
-                logger.debug(f"AI Response: {resp.text}")
+                logger.debug("AI Response: %s", resp.text)
                 
                 # Clean the response text before JSON parsing
                 response_text = resp.text.strip()
@@ -550,14 +555,15 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
                 # Parse JSON response
                 try:
                     data = json.loads(response_text)
-                    _response_cache.put_item(cache_key, data)
+                    with _api_lock:
+                        _response_cache.put_item(cache_key, data)
                     logger.info("Successfully parsed AI response")
                 except json.JSONDecodeError as e:
-                    logger.error(f"JSON parsing failed: {str(e)}. Response: {response_text}")
+                    logger.error("JSON parsing failed: %s. Response: %s", e, response_text)
                     raise ValueError(f"Invalid JSON response from AI: {str(e)}")
                     
             except Exception as e:
-                logger.error(f"AI model error: {str(e)}")
+                logger.error("AI model error: %s", e)
                 inc_analysis_error(relief_type=relief_key_for_metrics)
                 # Fallback to smart heuristics
                 fallback_date = get_smart_fallback_date(facts, relief)
@@ -574,13 +580,13 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
         start_date_str = data["start_date"]
         # Handle common placeholder issues
         if start_date_str in ["YYYY-MM-DD", "yyyy-mm-dd", "date"]:
-            logger.warning(f"AI returned placeholder date '{start_date_str}'. Using smart fallback.")
+            logger.warning("AI returned placeholder date '%s'. Using smart fallback.", start_date_str)
             start_date_str = get_smart_fallback_date(facts, relief)
             data["start_date"] = start_date_str
             
         start = datetime.datetime.strptime(start_date_str, "%Y-%m-%d")
     except ValueError as e:
-        logger.error(f"Date parsing error: {str(e)}. Using fallback date.")
+        logger.error("Date parsing error: %s. Using fallback date.", e)
         fallback_date = get_smart_fallback_date(facts, relief)
         data["start_date"] = fallback_date
         start = datetime.datetime.strptime(fallback_date, "%Y-%m-%d")
@@ -634,9 +640,9 @@ def analyse(facts: str, relief: str, pin: str, case_type: Optional[str] = None) 
     except ImportError:
         logger.warning("Enhanced analytics module not available")
     except Exception as e:
-        logger.error(f"Enhanced analytics error: {str(e)}")
+        logger.error("Enhanced analytics error: %s", e)
     
-    logger.info(f"Analysis complete: {days_left} days left")
+    logger.info("Analysis complete: %d days left", days_left)
     return result
 
 def validate_pin_code(pin: Any) -> bool:

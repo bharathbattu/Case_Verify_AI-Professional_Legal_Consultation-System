@@ -3,7 +3,7 @@ User Management System for Case-Verify AI
 """
 import streamlit as st
 from typing import List, Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 from database.models import User, Case, Analysis
 from database.connection import SessionLocal
 from passlib.hash import bcrypt
@@ -80,7 +80,7 @@ class UserManager:
                     else:
                         setattr(user, key, value)
             
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             return True
             
@@ -97,7 +97,7 @@ class UserManager:
                 return False
             
             user.is_active = False
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             return True
             
@@ -155,7 +155,7 @@ class UserManager:
                 return False
             
             user.is_verified = True
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             return True
             
@@ -172,7 +172,7 @@ class UserManager:
                 return False
             
             user.role = new_role
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             return True
             
@@ -202,7 +202,7 @@ class UserManager:
         try:
             user = self.get_user_by_id(user_id)
             if user:
-                user.last_login = datetime.utcnow()
+                user.last_login = datetime.now(timezone.utc)
                 self.db.commit()
         except Exception as e:
             self.db.rollback()

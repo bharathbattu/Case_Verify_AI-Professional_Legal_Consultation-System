@@ -32,7 +32,7 @@ try:
     logger.info("Phase 3.3 features loaded successfully")
 except Exception as e:  # Catch broader exceptions (e.g., SyntaxError/null byte) and fallback cleanly
     PHASE_3_3_AVAILABLE = False
-    logger.info(f"Phase 3.3 features not available, running in basic mode: {e}")
+    logger.info("Phase 3.3 features not available, running in basic mode: %s", e)
     # Provide a minimal stub to satisfy references when advanced auth components are unavailable
     class SessionManager:
         def __init__(self):
@@ -639,7 +639,7 @@ def render_case_analysis_interface():
                     <p style="margin: 0.5rem 0 0 0; font-size: 0.9em;">Please verify your input and ensure all required fields are completed accurately.</p>
                 </div>
                 """, unsafe_allow_html=True)
-                logger.error(f"Input validation error: {str(e)}")
+                logger.error("Input validation error: %s", e)
             except Exception as e:
                 error_details = str(e)
                 error_type = type(e).__name__
@@ -656,7 +656,7 @@ def render_case_analysis_interface():
                     </details>
                 </div>
                 """, unsafe_allow_html=True)
-                logger.error(f"System error: {error_type}: {error_details}")
+                logger.error("System error: %s: %s", error_type, error_details)
                 
                 # Try to provide helpful information
                 st.info("💡 **Troubleshooting Tips:**\n- Check that all fields are filled correctly\n- Ensure PIN code is valid (6 digits)\n- Try refreshing the page and analyzing again")

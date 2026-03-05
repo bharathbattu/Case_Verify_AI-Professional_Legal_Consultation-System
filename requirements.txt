@@ -12,16 +12,12 @@ Pillow>=10.0.0
 pytesseract>=0.3.10
 
 # Phase 3.3: User Management dependencies
-streamlit-authenticator>=0.2.3
 SQLAlchemy>=2.0.0
 bcrypt>=4.0.0
-python-jose>=3.3.0
 passlib>=1.7.4
 reportlab>=4.0.0
 openpyxl>=3.1.0
 pandas>=2.0.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
 
 # Development dependencies
 pytest>=7.4.0

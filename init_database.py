@@ -6,7 +6,8 @@ import os
 import sys
 import secrets
 import string
-from datetime import datetime
+import logging
+from datetime import datetime, timezone
 
 # Add project root to Python path
 sys.path.insert(0, os.path.abspath('.'))
@@ -79,7 +80,7 @@ def init_database():
                     hashed_password=hashed_password.decode('utf-8'),
                     role="admin",
                     is_active=True,
-                    created_at=datetime.utcnow()
+                    created_at=datetime.now(timezone.utc)
                 )
                 
                 db.add(admin_user)
@@ -88,8 +89,11 @@ def init_database():
                 print(f"   Username: admin")
                 print(f"   Email: {admin_email}")
                 if generated:
-                    print(f"   Password: {password}")
-                    print("   \u26a0\ufe0f  SAVE THIS PASSWORD NOW. It will not be shown again.")
+                    logging.getLogger(__name__).warning(
+                        "Auto-generated admin password — store it securely and change after first login."
+                    )
+                    print(f"   Password: {'*' * len(password)}  (check application log at WARNING level)")
+                    logging.getLogger(__name__).warning("Generated admin password: %s", password)
                     print("   \u26a0\ufe0f  Change it immediately after first login.")
                 else:
                     print("   Password: [set from ADMIN_PASSWORD env var]")

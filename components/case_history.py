@@ -4,12 +4,11 @@ Case History and Management Component for Case-Verify AI
 import streamlit as st
 import pandas as pd
 from typing import List, Optional, Dict, Any
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from database.models import Case, Analysis, User
 from database.connection import SessionLocal
 from auth.session_manager import get_current_user_id, require_auth
 from sanitize import esc
-import json
 
 class CaseManager:
     """Manages case operations and database interactions"""
@@ -94,7 +93,7 @@ class CaseManager:
                 if hasattr(case, key) and value is not None:
                     setattr(case, key, value)
             
-            case.updated_at = datetime.utcnow()
+            case.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             return True
             
@@ -383,7 +382,11 @@ class CaseHistory:
                     if case.tags:
                         st.markdown("**Tags:**")
                         for tag in case.tags:
-                            st.badge(tag, type="secondary")
+                            st.markdown(
+                                f'<span style="display:inline-block;background:#e0e0e0;border-radius:12px;'
+                                f'padding:2px 10px;margin:2px 4px 2px 0;font-size:0.85em;">{tag}</span>',
+                                unsafe_allow_html=True,
+                            )
             
             # Action buttons
             col1, col2, col3, col4, col5 = st.columns(5)

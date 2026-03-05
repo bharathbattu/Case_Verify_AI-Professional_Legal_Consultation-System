@@ -10,12 +10,6 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT, TA_JUSTIFY
 from reportlab.lib import colors
 from reportlab.lib.units import inch
-from reportlab.graphics.shapes import Drawing
-from reportlab.graphics.charts.piecharts import Pie
-from reportlab.graphics.charts.barcharts import VerticalBarChart
-# Note: matplotlib and seaborn available for future chart generation if needed
-# import matplotlib.pyplot as plt
-# import seaborn as sns
 from database.models import Case, Analysis, User
 
 class PDFGenerator:
@@ -178,6 +172,7 @@ class PDFGenerator:
         if case.court_suggestion:
             case_data.append(['Recommended Court:', case.court_suggestion])
         
+        urgency_color = colors.grey  # default; overridden when days_remaining is set
         if case.days_remaining is not None:
             urgency_color = colors.red if case.days_remaining < 30 else colors.orange if case.days_remaining < 90 else colors.green
             days_remaining_text = f"{case.days_remaining} days"

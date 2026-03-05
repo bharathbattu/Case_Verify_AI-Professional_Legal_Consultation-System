@@ -28,9 +28,10 @@ def _check_database() -> Dict[str, Any]:
     """Verify database is reachable and tables exist."""
     try:
         from database.connection import SessionLocal
+        from sqlalchemy import text
         db = SessionLocal()
         try:
-            db.execute("SELECT 1")  # type: ignore[arg-type]
+            db.execute(text("SELECT 1"))
             return {"status": "ok"}
         finally:
             db.close()

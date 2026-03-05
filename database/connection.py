@@ -47,7 +47,7 @@ def db_session() -> Generator[Session, None, None]:
 
         with db_session() as db:
             user = db.query(User).filter_by(username="admin").first()
-            user.last_login = datetime.utcnow()
+            user.last_login = datetime.now(timezone.utc)
             # auto-commits on clean exit, auto-rollbacks on exception
 
     The session is **always closed** when the block exits.

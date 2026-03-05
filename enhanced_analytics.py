@@ -201,7 +201,7 @@ def calculate_court_costs(case_type: str, court_type: str, claim_amount: Optiona
         Dictionary with cost breakdown
     """
     # Normalize court type
-    court_key = court_type.lower().replace(' ', '_').replace('court', 'court')
+    court_key = court_type.lower().replace(' ', '_')
     if 'consumer' in court_key:
         court_key = 'consumer_forum'
     elif 'district' in court_key or 'civil' in court_key:
@@ -265,7 +265,7 @@ def predict_case_timeline(case_type: str, court_type: str, case_complexity: str 
         Timeline prediction with dates
     """
     # Normalize court type
-    court_key = court_type.lower().replace(' ', '_').replace('court', 'court')
+    court_key = court_type.lower().replace(' ', '_')
     if 'consumer' in court_key:
         court_key = 'consumer_forum'
     elif 'district' in court_key or 'civil' in court_key:
@@ -430,11 +430,11 @@ def generate_enhanced_analysis(case_data: Dict[str, Any], facts: str, case_type:
             }
         }
         
-        logger.info(f"Enhanced analytics generated for {case_type}")
+        logger.info("Enhanced analytics generated for %s", case_type)
         return enhanced_data
         
     except Exception as e:
-        logger.error(f"Error generating enhanced analytics: {str(e)}")
+        logger.error("Error generating enhanced analytics: %s", e)
         return {
             'phase3_analytics': {
                 'error': 'Enhanced analytics temporarily unavailable',

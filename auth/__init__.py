@@ -22,7 +22,7 @@ try:
     
 except Exception as e:
     if not _auth_status_logged:
-        logger.warning(f"Full auth import failed ({e}). Loading simplified fallback.")
+        logger.warning("Full auth import failed (%s). Loading simplified fallback.", e)
         _auth_status_logged = True
     
     try:
@@ -72,7 +72,7 @@ except Exception as e:
         ]
         
     except Exception as e2:
-        logger.error(f"Even simplified auth failed: {e2}. Using minimal fallback.")
+        logger.error("Even simplified auth failed: %s. Using minimal fallback.", e2)
         
         def get_authenticator():
             """Minimal fallback authenticator"""

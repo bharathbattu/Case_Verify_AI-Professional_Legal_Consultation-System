@@ -2,7 +2,7 @@
 Session Management for Case-Verify AI
 """
 import streamlit as st
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 from database.models import UserSession, User
 from database.connection import SessionLocal
@@ -47,7 +47,7 @@ class SessionManager:
             session = UserSession(
                 user_id=user_id,
                 session_token=session_token,
-                expires_at=datetime.utcnow() + self.session_timeout,
+                expires_at=datetime.now(timezone.utc) + self.session_timeout,
                 user_agent=user_agent,
                 ip_address=ip_address,
                 device_info={'created_from': 'streamlit_app'}
@@ -89,7 +89,7 @@ class SessionManager:
             session = db.query(UserSession).filter(
                 UserSession.session_token == session_token,
                 UserSession.is_active == True,
-                UserSession.expires_at > datetime.utcnow()
+                UserSession.expires_at > datetime.now(timezone.utc)
             ).first()
             
             if session:
@@ -154,7 +154,7 @@ class SessionManager:
             ).first()
             
             if session:
-                session.expires_at = datetime.utcnow() + self.session_timeout
+                session.expires_at = datetime.now(timezone.utc) + self.session_timeout
                 db.commit()
                 return True
             
@@ -174,7 +174,7 @@ class SessionManager:
             sessions = db.query(UserSession).filter(
                 UserSession.user_id == user_id,
                 UserSession.is_active == True,
-                UserSession.expires_at > datetime.utcnow()
+                UserSession.expires_at > datetime.now(timezone.utc)
             ).all()
             
             return sessions
@@ -190,7 +190,7 @@ class SessionManager:
         db = SessionLocal()
         try:
             expired_sessions = db.query(UserSession).filter(
-                UserSession.expires_at < datetime.utcnow()
+                UserSession.expires_at < datetime.now(timezone.utc)
             ).all()
             
             for session in expired_sessions:
